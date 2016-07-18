@@ -1,5 +1,5 @@
 # AlpineLinux with a glibc-2.23 and Oracle Java 6
-FROM alpine:3.3
+FROM alpine:3.4
 
 MAINTAINER Guillaume Carre
 
@@ -12,7 +12,7 @@ ENV JAVA_VERSION_MAJOR=6 \
     LANG=C.UTF-8
 
 RUN apk upgrade --update && \
-    apk add --update curl ca-certificates bash wget unzip && \
+    apk add --update curl ca-certificates bash wget unzip openssl && \
     for pkg in glibc-2.23-r1 glibc-bin-2.23-r1 glibc-i18n-2.23-r1; do curl -sSL https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/${pkg}.apk -o /tmp/${pkg}.apk; done && \
     apk add --allow-untrusted /tmp/*.apk && \
     rm -v /tmp/*.apk && \
